@@ -10,21 +10,14 @@ pipeline {
         PUPPET = '"C:\\Program Files\\Puppet Labs\\Puppet\\bin\\puppet.bat"'  // Chemin de l'exécutable Puppet
     }
         
-     
+    // Définition des différentes étapes du pipeline
+    stages {
+       
         // Étape de récupération du code source
         stage('Checkout') {
             steps {
                 // Clone le répertoire git spécifié dans la branche 'master' en utilisant les identifiants donnés
-                git credentialsId: '6672a1f2-2b4c-46a7-a379-bb4984ee7d06', url: 'https://github.com/Saifoulaye-Diallo/CICDAPP.git', branch: 'master'
-            }
-        }
-        // Étape de configuration initiale avec Puppet
-        stage('Puppet Configuration') {
-            steps {
-                script {
-                    // Exécute un script Puppet pour appliquer un manifeste, préparant l'environnement
-                    bat "${env.PUPPET} apply ${WORKSPACE}\\init.pp"
-                }
+                git credentialsId: '6672a1f2-2b4c-46a7-a379-bb4984ee7d06', url: 'https://github.com/Saifoulaye-Diallo/CICD-.NET.git', branch: 'master'
             }
         }
         // Étape de restauration des packages NuGet
@@ -39,6 +32,15 @@ pipeline {
             steps {
                 // Construit le projet en mode Release sans restaurer les packages (car déjà fait)
                 bat "${env.DOTNET} build ${WORKSPACE}\\SeleniumApp.sln --configuration Release --no-restore"
+            }
+        }
+         // Étape de configuration initiale avec Puppet
+        stage('Puppet Configuration') {
+            steps {
+                script {
+                    // Exécute un script Puppet pour appliquer un manifeste, préparant l'environnement
+                    bat "${env.PUPPET} apply ${WORKSPACE}\\init.pp"
+                }
             }
         }
         // Étape de publication dans l'environnement de préproduction
