@@ -12,9 +12,9 @@ pipeline {
         
     // Définition des différentes étapes du pipeline
     stages {
-         stage('Display Workspace') {
+        stage('Clean Workspace') {
             steps {
-                echo "The workspace is located at: ${env.WORKSPACE}"
+                deleteDir()
             }
         }
         // Étape de configuration initiale avec Puppet
