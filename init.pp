@@ -40,7 +40,7 @@ $site_configurations = {
     'site_path'        => $production_path,
     'app_pool'         => 'ProductionPool',
     'site_port'        => $production_port,
-    'restart_required' => true,
+    'restart_required' => false,
   },
   'PreProductionSite' => {
     'site_path'        => $preproduction_path,
