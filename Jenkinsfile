@@ -25,7 +25,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Clone le répertoire git spécifié dans la branche 'master' en utilisant les identifiants donnés
-                git credentialsId: '6672a1f2-2b4c-46a7-a379-bb4984ee7d06', url: 'https://github.com/Saifoulaye-Diallo/CICD-.NET.git', branch: 'master'
+                git credentialsId: '6672a1f2-2b4c-46a7-a379-bb4984ee7d06', url: 'https://github.com/Saifoulaye-Diallo/CICDAPP.git', branch: 'master'
             }
         }
         // Étape de restauration des packages NuGet
