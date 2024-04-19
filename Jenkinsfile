@@ -49,7 +49,7 @@ pipeline {
                 // Arrête le service IIS pour permettre la publication
                 bat 'net stop "w3svc" /y'
                 // Publie l'application dans le répertoire de préproduction spécifié
-                bat "\"${env.DOTNET}\" publish \"${WORKSPACE}\\SeleniumApp\\SeleniumApp.csproj\" --configuration Release --output \"${env.PREPRODUCTION_DIR}\" --no-restore --no-build"
+                bat "\"${env.DOTNET}\" publish \"${WORKSPACE}\\SeleniumApp\\SeleniumApp.csproj\" --configuration Release --no-restore --no-build --output \"${env.PREPRODUCTION_DIR}\""
                 // Redémarre le service IIS après la publication
                  bat 'net start "w3svc"'
             }
@@ -73,7 +73,7 @@ pipeline {
                 // Arrête le service IIS avant la publication
                 bat 'net stop "w3svc" /y'
                 // Publie l'application dans le répertoire de production spécifié
-                bat "\"${env.DOTNET}\" publish \"${WORKSPACE}\\SeleniumApp\\SeleniumApp.csproj\" --configuration Release --output \"${env.PREPRODUCTION_DIR}\" --no-restore --no-build"
+                bat "\"${env.DOTNET}\" publish \"${WORKSPACE}\\SeleniumApp\\SeleniumApp.csproj\" --configuration Release --no-restore --no-build --output \"${env.PRODUCTION_DIR}\""
                 // Redémarre le service IIS après la publication
                 bat 'net start "w3svc"'
             }
