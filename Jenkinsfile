@@ -7,7 +7,7 @@ pipeline {
         PRODUCTION_DIR = 'C:\\inetpub\\gestionetudiants\\production\\'  // Chemin du répertoire de production
         PREPRODUCTION_DIR = 'C:\\inetpub\\gestionetudiants\\preproduction\\'  // Chemin du répertoire de préproduction
         DOTNET = "C:\\Program Files\\dotnet\\dotnet.exe"
-        PUPPET = '"C:\\Program Files\\Puppet Labs\\Puppet\\bin\\puppet.bat"'  // Chemin de l'exécutable Puppet
+        PUPPET = "C:\\Program Files\\Puppet Labs\\Puppet\\bin\\puppet.bat"  // Chemin de l'exécutable Puppet
     }
         
     // Définition des différentes étapes du pipeline
@@ -39,7 +39,7 @@ pipeline {
             steps {
                 script {
                     // Exécute un script Puppet pour appliquer un manifeste, préparant l'environnement
-                    bat "${env.PUPPET} apply ${WORKSPACE}\\init.pp"
+                    bat "\"${env.PUPPET}\" apply \"${WORKSPACE}\\init.pp\"
                 }
             }
         }
