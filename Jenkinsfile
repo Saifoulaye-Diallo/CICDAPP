@@ -31,7 +31,7 @@ pipeline {
         stage('Build') {
             steps {
                 // Construit le projet en mode Release sans restaurer les packages (car déjà fait)
-                bat "${env.DOTNET} build ${WORKSPACE}\\SeleniumApp.sln --configuration Release --no-restore"
+                bat "\"${env.DOTNET}\" build \"${WORKSPACE}\\SeleniumApp.sln\" --configuration Release --no-restore"
             }
         }
          // Étape de configuration initiale avec Puppet
