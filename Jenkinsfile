@@ -24,7 +24,8 @@ pipeline {
         stage('Restore') {
             steps {
                 // Restaure les dépendances nécessaires pour le projet
-                bat "${env.DOTNET} restore ${WORKSPACE}\\SeleniumApp.sln"
+                bat "\"${env.DOTNET}\" restore \"${WORKSPACE}\\SeleniumApp.sln\""
+
             }
         }
         // Étape de construction de l'application
