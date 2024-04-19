@@ -39,7 +39,7 @@ pipeline {
             steps {
                 script {
                     // Exécute un script Puppet pour appliquer un manifeste, préparant l'environnement
-                    bat "\"${env.PUPPET}\" apply \"${WORKSPACE}\\init.pp\"
+                    bat "\"${env.PUPPET}\" apply \"${WORKSPACE}\\init.pp\""
                 }
             }
         }
