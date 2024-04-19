@@ -49,7 +49,7 @@ pipeline {
                 // Arrête le service IIS pour permettre la publication
                 bat 'net stop "w3svc" /y'
                 // Publie l'application dans le répertoire de préproduction spécifié
-                bat "dotnet publish %WORKSPACE%\\SeleniumApp\\SeleniumApp.csproj --configuration Release --output ${env.PREPRODUCTION_DIR} --no-restore --no-build"
+                  bat "\"${env.DOTNET}\" publish \"${WORKSPACE}\\SeleniumApp\\SeleniumApp.csproj\" --configuration Release --output \"${env.PREPRODUCTION_DIR}\" --no-restore --no-build"
                 // Redémarre le service IIS après la publication
                 bat 'net start "w3svc"'
             }
@@ -58,7 +58,7 @@ pipeline {
         stage('Test Preproduction') {
             steps {
                 // Exécute les tests unitaires du projet spécifié
-                bat "${env.DOTNET} test %WORKSPACE%\\SeleniumTest\\SeleniumTest.csproj --no-restore --verbosity normal"
+            bat "\"${env.DOTNET}\" test \"${WORKSPACE}\\SeleniumTest\\SeleniumTest.csproj\" --no-restore --verbosity normal"
             }
         }
         // Étape de publication en production
@@ -73,7 +73,7 @@ pipeline {
                 // Arrête le service IIS avant la publication
                 bat 'net stop "w3svc" /y'
                 // Publie l'application dans le répertoire de production spécifié
-                bat "dotnet publish %WORKSPACE%\\SeleniumApp\\SeleniumApp.csproj --configuration Release --output ${env.PRODUCTION_DIR} --no-restore --no-build"
+                bat "\"${env.DOTNET}\" publish \"${WORKSPACE}\\SeleniumApp\\SeleniumApp.csproj\" --configuration Release --output \"${env.PRODUCTION_DIR}\" --no-restore --no-build"
                 // Redémarre le service IIS après la publication
                 bat 'net start "w3svc"'
             }
