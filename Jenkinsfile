@@ -12,6 +12,11 @@ pipeline {
         
     // Définition des différentes étapes du pipeline
     stages {
+         stage('Display Workspace') {
+            steps {
+                echo "The workspace is located at: ${env.WORKSPACE}"
+            }
+        }
         // Étape de configuration initiale avec Puppet
         stage('Puppet Configuration') {
             steps {
