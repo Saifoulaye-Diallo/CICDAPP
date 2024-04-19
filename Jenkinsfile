@@ -6,7 +6,7 @@ pipeline {
     environment {
         PRODUCTION_DIR = 'C:\\inetpub\\gestionetudiants\\production\\'  // Chemin du répertoire de production
         PREPRODUCTION_DIR = 'C:\\inetpub\\gestionetudiants\\preproduction\\'  // Chemin du répertoire de préproduction
-        DOTNET = '"C:\\Program Files\\dotnet\\dotnet.exe"'  // Chemin de l'exécutable dotnet
+        DOTNET = "C:\\Program Files\\dotnet\\dotnet.exe"
         PUPPET = '"C:\\Program Files\\Puppet Labs\\Puppet\\bin\\puppet.bat"'  // Chemin de l'exécutable Puppet
     }
         
@@ -24,8 +24,7 @@ pipeline {
         stage('Restore') {
             steps {
                 // Restaure les dépendances nécessaires pour le projet
-                bat "\"${env.DOTNET}\" restore \"${WORKSPACE}\\SeleniumApp.sln\""
-
+              bat "\"${env.DOTNET}\" restore \"${WORKSPACE}\\SeleniumApp.sln\""
             }
         }
         // Étape de construction de l'application
