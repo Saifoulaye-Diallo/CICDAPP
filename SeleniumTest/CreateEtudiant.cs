@@ -49,7 +49,7 @@ namespace SeleniumTest
                                               .Any(cell => cell.Text == email));
 
             // Utiliser l'assertion pour vérifier la présence de l'email
-            Assert.IsTrue(false, $"L'email {email} n'a pas été trouvé dans le tableau.");
+            Assert.IsTrue(emailTrouver, $"L'email {email} n'a pas été trouvé dans le tableau.");
         }
 
         [TearDown]
