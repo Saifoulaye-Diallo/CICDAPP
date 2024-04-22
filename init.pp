@@ -75,3 +75,23 @@ $site_configurations.each |$site_name, $config| {
     }
   }
 }
+# Suppression du pool d'applications de pré-production
+exec { "delete-preproduction-app-pool":
+  command   => "C:\\Windows\\System32\\inetsrv\\appcmd.exe delete apppool /apppool.name:PreProductionPool",
+  onlyif    => "C:\\Windows\\System32\\inetsrv\\appcmd.exe list apppool | findstr /i PreProductionPool",
+  provider  => powershell,
+}
+
+# Suppression du site IIS de pré-production
+iis_site { 'PreProductionSite':
+  ensure    => 'absent',
+  require   => Exec["delete-preproduction-app-pool"],  # Assure que le pool d'applications est supprimé avant le site
+}
+
+# Suppression du dossier de pré-production
+file { $preproduction_path:
+  ensure    => 'absent',
+  recurse   => true,    # Supprime récursivement le contenu du dossier
+  force     => true,    # Nécessaire pour supprimer les dossiers non vides
+  require   => Iis_site['PreProductionSite'],  # Assure que le site IIS est supprimé avant de supprimer le dossier
+}
